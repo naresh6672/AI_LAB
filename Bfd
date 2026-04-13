@@ -1,0 +1,41 @@
+from collections import deque
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.children = []
+
+def bfs(root):
+    if root is None:
+        return []
+
+    queue = deque([root])
+    visited = set()
+    result = []
+
+    while queue:
+        node = queue.popleft()
+
+        if node in visited:
+            continue
+
+        visited.add(node)
+        result.append(node.val)
+
+        for child in node.children:
+            queue.append(child)
+
+    return result
+
+
+if __name__ == "__main__":
+    A = Node('A')
+    B = Node('B')
+    C = Node('C')
+    D = Node('D')
+
+    A.children = [B, C]
+    B.children = [D]
+
+    output = bfs(A)
+    print("BFS Traversal:", output)
